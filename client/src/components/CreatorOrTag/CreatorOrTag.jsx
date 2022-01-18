@@ -20,7 +20,7 @@ const CreatorOrTag = () => {
         if(location.pathname.startsWith('/creator'))
             dispatch(getPostsByCreator(name));
     },[]);
-
+    console.log(posts)
     if (!posts.length && !isLoading) return 'No posts';
 
     if(isLoading) {

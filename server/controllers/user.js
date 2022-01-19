@@ -15,7 +15,7 @@ export const signin = async (req, res) => {
 
         if(!isPasswordCorrect) return res.status(400).json({message: "Wrong Credentials."});
 
-        const token = jwt.sign({ email: existingUser.email, id: existingUser._id, totalScore: existingUser.totalScore, isAdmin: existingUser.isAdmin }, 'mictransformerdev', { expiresIn: '1h' });
+        const token = jwt.sign({ email: existingUser.email, id: existingUser._id, isAdmin: existingUser.isAdmin }, 'mictransformerdev', { expiresIn: '1h' });
 
         res.status(200).json({ result: existingUser, token });
 
@@ -37,7 +37,7 @@ export const signup = async (req, res) => {
 
         const result = await User.create({ email, password: hashedPassword, name: `${firstname} ${lastname}` });
 
-        const token = jwt.sign({ email: result.email, id: result._id, totalScore: result.totalScore, isAdmin: result.isAdmin  }, 'mictransformerdev', { expiresIn: '1h' });
+        const token = jwt.sign({ email: result.email, id: result._id, isAdmin: result.isAdmin  }, 'mictransformerdev', { expiresIn: '1h' });
 
         res.status(200).json({ result, token });
         

@@ -55,6 +55,8 @@ export default makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     textAlign: 'center',
+    textDecoration: 'none',
+    color: 'black'
   },
   brandContainer: {
     display: 'flex',

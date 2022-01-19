@@ -10,7 +10,7 @@ export default makeStyles((theme) => ({
   },
   card: {
     display: 'flex',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     width: '100%',
     [theme.breakpoints.down('sm')]: {
       flexWrap: 'wrap',
@@ -34,6 +34,8 @@ export default makeStyles((theme) => ({
     [theme.breakpoints.down('sm')]: {
       flexDirection: 'column',
     },
+    borderRadius: '15px',
+    marginTop: '30px'
   },
   loadingPaper: {
     display: 'flex',
@@ -59,6 +61,11 @@ export default makeStyles((theme) => ({
     textDecoration: 'none',
     color: '#3f51b5',
     marginLeft: '5px',
+  },
+  scoreInnerContainer: {
+    height: 'auto',
+    overflowY: 'auto',
+    marginRight: '30px',
   },
   tag: {
     textDecoration: 'none',

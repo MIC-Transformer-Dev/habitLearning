@@ -10,29 +10,27 @@ const CommentSection = ({ post }) => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const commentsRef = useRef();
-    const [comments, setComments] = useState(post?.comments);
+    const [scores, setScores] = useState(post?.score);
     const [score, setScore] = useState('');
 
     const handleClick = async () => {
-        const finalComment = `${user.result.name}: ${score}`;
-        const newComments = await dispatch(updatePost(post._id, {score}));
-        setComments(newComments);
+        const newScores = await dispatch(updatePost(post._id, {score}));
+        setScores(newScores);
         setScore('');
-        commentsRef.current.scrollIntoView({ behavior: 'smooth'});
     }
 
     return (
         <>
             <div className={classes.commentsOuterContainer}>
-                <div className={classes.commentsInnerContainer}> 
+                <div className={classes.scoreInnerContainer}> 
                     <Typography gutterBottom variant='h6'>Score</Typography>
                         <Typography variant='h3' gutterBottom>
-                            <strong>{post.score}</strong>
+                            <strong>{scores}</strong>
                             <strong>/100</strong>
                         </Typography>
                     <div ref={commentsRef} />
                 </div>
-                {user?.result?.name && (
+                {user?.result?.isAdmin && (
                     <div style={{ width: '70%'}}>
                         <Typography gutterBottom variant='h6'>Add Score Here</Typography>
                         <TextField 

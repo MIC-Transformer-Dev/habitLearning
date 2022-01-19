@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import PostMessage from "../models/postMessage.js";
+import User from "../models/user.js";
 
 export const getPosts = async(req,res) => {
     const { page } = req.query;
@@ -29,7 +30,7 @@ export const getPost = async(req,res) => {
 export const getPostsByCreator = async(req, res) => {
     const { name } = req.query;
     try {
-        const posts = await PostMessage.find({ name });
+        const posts = await PostMessage.find({ name }).sort({ createdAt: -1 });
         res.status(200).json({ data: posts });
     } catch (error) {
         res.status(404).json({ message: error.message });
@@ -73,6 +74,7 @@ export const updatePost = async (req,res) => {
        
     try {
         const updatedPost = await PostMessage.findByIdAndUpdate(id, post, { new: true });
+        const creatorData = await User.findById(updatedPost.creator)
         res.json(updatedPost);
     } catch (error) {
         res.status(409).json({message: error.message});

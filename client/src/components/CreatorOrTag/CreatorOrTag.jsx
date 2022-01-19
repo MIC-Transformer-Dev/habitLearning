@@ -39,9 +39,11 @@ const CreatorOrTag = () => {
         <div>
             <div className={classes.creatortitle}>
                 <Typography variant="h3" className={classes.divider}>{name}</Typography>
+                {location.pathname?.startsWith('/creator') && (
                 <Card className={classes.card}>
                     <Typography variant="h4" className={classes.score}>Total Score : {user.result.totalScore}</Typography>
                 </Card>
+                )}
             </div>
             <Divider className={classes.divider} />
             <Grid container alignItems='stretch' spacing={3}>

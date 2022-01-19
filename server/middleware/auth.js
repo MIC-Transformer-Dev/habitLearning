@@ -9,9 +9,10 @@ const auth = async (req, res, next) => {
 
         if(token && isCustomAuth)
         {
-            decodedData = jwt.verify(token, 'test');
+            decodedData = jwt.verify(token, 'mictransformerdev');
 
             req.userId = decodedData?.id;
+            req.isAdmin = decodedData?.isAdmin;
 
         } else {
             decodedData = jwt.decode(token);

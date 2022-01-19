@@ -50,7 +50,7 @@ const Form = ({ currentId, setCurrentId }) => {
         return (
             <Paper className={classes.paper}>
                 <Typography variant='h6' align='center'>
-                    Please Sign in to create your own memories and like other's memories.
+                    Please Sign in to continue.
                 </Typography>
             </Paper>
         );
@@ -59,7 +59,7 @@ const Form = ({ currentId, setCurrentId }) => {
     return (
         <Paper className={classes.paper} elevation={6}> 
             <form autoComplete='off' noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSumbit}>
-                <Typography className={classes.heading} variant='h6' align='center'>Creating A Memory</Typography>
+                <Typography className={classes.heading} variant='h6' align='center'>Post Your Task Here</Typography>
                 <TextField variant='outlined' label="Title" name="title" fullWidth value={postData.title} onChange={(e) => setPostData({ ...postData, title: e.target.value })} />
                 <TextField variant='outlined' label="Message" name="message" multiline rows={4} fullWidth value={postData.message} onChange={(e) => setPostData({ ...postData, message: e.target.value })} />
                 <TextField variant='outlined' label="Tags (coma separated)" name="tags" fullWidth value={postData.tags} onChange={(e) => setPostData({ ...postData, tags: e.target.value.split(',') })} />
@@ -70,7 +70,7 @@ const Form = ({ currentId, setCurrentId }) => {
                         onDone={({base64}) => setPostData({...postData, selectedFile: base64})}
                     />
                 </section>
-                <Button className={classes.buttonSubmit} variant='contained' color="primary" size="large" type="sumbit" fullWidth>Sumbit</Button>
+                <Button className={classes.buttonSubmit} variant='contained' color="primary" size="large" type="sumbit" fullWidth>Submit</Button>
                 <Button variant='contained' color="secondary" size="medium" onClick={clear} fullWidth>Clear</Button>
             </form>
         </Paper>

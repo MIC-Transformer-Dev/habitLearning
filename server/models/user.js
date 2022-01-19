@@ -14,6 +14,14 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
+    totalScore: {
+        type: Number,
+        default: 0
+    },
+    isAdmin: {
+        type: Boolean,
+        default: false
+    },
     id: {
         type: String
     }

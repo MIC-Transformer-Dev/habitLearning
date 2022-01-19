@@ -54,7 +54,7 @@ const Home = () => {
                         <AppBar className={classes.appBarSearch} position="static" color='inherit'>
                             <TextField 
                                 variant='outlined' 
-                                label="Search Memories" 
+                                label="Search Tasks" 
                                 onKeyPress={handleKeyPress}
                                 name="search" 
                                 fullWidth 

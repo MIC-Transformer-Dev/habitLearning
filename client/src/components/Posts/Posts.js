@@ -9,7 +9,11 @@ const Posts = ({ setCurrentId }) => {
     const classes = useStyles();
     const { posts, isLoading } = useSelector((state) => state.posts); // before [] -> now { isLoading, posts: [] }
 
-    if(!posts.length && !isLoading) return 'No posts';
+    if(!posts.length && !isLoading) {
+        return (
+            <h1>No Posted Tasks Yet</h1>
+        );
+    }
 
     return (
         isLoading ? (

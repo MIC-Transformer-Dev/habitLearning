@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react';
-import { Grid, Typography, Divider, CircularProgress, Paper } from '@material-ui/core';
+import React, { useState, useEffect } from 'react';
+import { Card, Grid, Typography, Divider, CircularProgress, Paper } from '@material-ui/core';
 import { useParams, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-
 import { getPostsByCreator, getPostsBySearch } from '../../actions/posts';
 import Post from '../Posts/Post/Post';
 import useStyles from './styles';
 
 const CreatorOrTag = () => {
     const { name } = useParams();
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
     const classes = useStyles();
     const dispatch = useDispatch();
     const location = useLocation();
@@ -20,7 +20,11 @@ const CreatorOrTag = () => {
         if(location.pathname.startsWith('/creator'))
             dispatch(getPostsByCreator(name));
     },[]);
-    console.log(posts)
+
+    useEffect(() => {
+        setUser(JSON.parse(localStorage.getItem('profile')));
+    }, [location]);
+
     if (!posts.length && !isLoading) return 'No posts';
 
     if(isLoading) {
@@ -33,7 +37,12 @@ const CreatorOrTag = () => {
 
     return (
         <div>
-            <Typography variant="h3" className={classes.divider}>{name}</Typography>
+            <div className={classes.creatortitle}>
+                <Typography variant="h3" className={classes.divider}>{name}</Typography>
+                <Card className={classes.card}>
+                    <Typography variant="h4" className={classes.score}>Total Score : {user.result.totalScore}</Typography>
+                </Card>
+            </div>
             <Divider className={classes.divider} />
             <Grid container alignItems='stretch' spacing={3}>
                 {posts?.map((post, i) => (

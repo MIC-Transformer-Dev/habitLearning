@@ -10,7 +10,7 @@ const ScoreCard = ({ posts }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const location = useLocation();
-  const id = useState(posts?.creator);
+  const id = useState(posts[0]?.creator);
 
   useEffect(() => {
     dispatch(getUser(id));

@@ -44,7 +44,7 @@ const CreatorOrTag = () => {
                 // <Card className={classes.card}>
                 //     <Typography variant="h4" className={classes.score}>Total Score : {user.result.totalScore}</Typography>
                 // </Card>
-                <ScoreCard posts = {posts} />
+                <ScoreCard post = {posts[0]} />
                 )}
             </div>
             <Divider className={classes.divider} />

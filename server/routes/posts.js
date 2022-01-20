@@ -1,5 +1,4 @@
 import express from 'express';
-
 import { getPostsBySearch, getPosts, getPost, getPostsByCreator, createPost, updatePost, likePost, commentPost, deletePost } from '../controllers/posts.js';
 import auth from '../middleware/auth.js';
 

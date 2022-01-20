@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getPostsByCreator, getPostsBySearch } from '../../actions/posts';
 import Post from '../Posts/Post/Post';
 import useStyles from './styles';
+import ScoreCard from './ScoreCard';
 
 const CreatorOrTag = () => {
     const { name } = useParams();
@@ -40,9 +41,10 @@ const CreatorOrTag = () => {
             <div className={classes.creatortitle}>
                 <Typography variant="h3" className={classes.divider}>{name}</Typography>
                 {location.pathname?.startsWith('/creator') && (
-                <Card className={classes.card}>
-                    <Typography variant="h4" className={classes.score}>Total Score : {user.result.totalScore}</Typography>
-                </Card>
+                // <Card className={classes.card}>
+                //     <Typography variant="h4" className={classes.score}>Total Score : {user.result.totalScore}</Typography>
+                // </Card>
+                <ScoreCard posts = {posts} />
                 )}
             </div>
             <Divider className={classes.divider} />

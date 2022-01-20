@@ -45,3 +45,28 @@ export const signup = async (req, res) => {
         res.status(500).json({ message: "Something went Wrong." });
     }
 }
+
+export const getUsers = async(req,res) => {
+    const { page } = req.query;
+    try {
+        const LIMIT = 6;
+        const startIndex = (Number(page) - 1) * LIMIT; //gettting the start index of every page
+        const total = await User.countDocuments({});
+
+        const users= await User.find().sort({ name: 1 }).limit(LIMIT).skip(startIndex);
+
+        res.status(200).json({ data: uses, currentPage: Number(page), numberOfPages: Math.ceil(total / LIMIT) });
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+};
+
+export const getUser = async(req,res) => {
+    const { id } = req.params;
+    try {
+        const post = await User.findById(id);
+        res.status(200).json(post);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+};

@@ -9,7 +9,7 @@ export const getPosts = async(req,res) => {
         const startIndex = (Number(page) - 1) * LIMIT; //gettting the start index of every page
         const total = await PostMessage.countDocuments({});
 
-        const posts= await PostMessage.find().sort({ _id: -1 }).limit(LIMIT).skip(startIndex);
+        const posts= await PostMessage.find().sort({ createdAt: -1 }).limit(LIMIT).skip(startIndex);
 
         res.status(200).json({ data: posts, currentPage: Number(page), numberOfPages: Math.ceil(total / LIMIT) });
     } catch (error) {
@@ -37,15 +37,12 @@ export const getPostsByCreator = async(req, res) => {
     }
 }
 
-//Query /posts?page=1 -> page=1
-//params /posts/:id /posts/123 -> id=123
-
 export const getPostsBySearch = async (req, res) => {
     const { searchQuery, tags } = req.query;
 
     try {
         const title = new RegExp(searchQuery, 'i'); // Test, TEST, test -> test
-        const posts = await PostMessage.find({ $or: [ { title } ,  { tags: { $in: tags.split(',') } } ] });
+        const posts = await PostMessage.find({ $or: [ { title } ,  { tags: { $in: tags.split(',') } } ] }).sort({ createdAt: -1 });
         res.status(200).json({ data: posts });
     } catch (error) {
         res.status(404).json({ message: error.message});

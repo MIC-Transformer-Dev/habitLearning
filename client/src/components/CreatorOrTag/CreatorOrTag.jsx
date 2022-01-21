@@ -3,17 +3,19 @@ import { Card, Grid, Typography, Divider, CircularProgress, Paper } from '@mater
 import { useParams, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getPostsByCreator, getPostsBySearch } from '../../actions/posts';
+import { getUser } from '../../actions/user';
 import Post from '../Posts/Post/Post';
 import useStyles from './styles';
-import ScoreCard from './ScoreCard';
+import { fetchUser } from '../../api';
 
 const CreatorOrTag = () => {
     const { name } = useParams();
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
     const classes = useStyles();
     const dispatch = useDispatch();
     const location = useLocation();
     const { posts, isLoading } = useSelector((state) => state.posts);
+    const [ creator, setCreator ] = useState('')
+    const [loadingUser, setLoadingUser] = useState(true);
 
     useEffect(() => {
         if(location.pathname.startsWith('/tag'))
@@ -22,9 +24,12 @@ const CreatorOrTag = () => {
             dispatch(getPostsByCreator(name));
     },[]);
 
-    useEffect(() => {
-        setUser(JSON.parse(localStorage.getItem('profile')));
-    }, [location]);
+    useEffect(async () => {
+        const data = await fetchUser(name)
+        setCreator(data);
+        setLoadingUser(false);
+    },[]);
+
 
     if (!posts.length && !isLoading) return 'No posts';
 
@@ -36,15 +41,22 @@ const CreatorOrTag = () => {
         );
     };
 
+    if(loadingUser) {
+        return(
+            <Paper elevation={6}>
+                <CircularProgress size="7em" />
+            </Paper>
+        );
+    };
+
     return (
         <div>
             <div className={classes.creatortitle}>
                 <Typography variant="h3" className={classes.divider}>{name}</Typography>
                 {location.pathname?.startsWith('/creator') && (
-                // <Card className={classes.card}>
-                //     <Typography variant="h4" className={classes.score}>Total Score : {user.result.totalScore}</Typography>
-                // </Card>
-                <ScoreCard post = {posts[0]} />
+                <Card className={classes.card}>
+                    <Typography variant="h4" className={classes.score}>Total Score : {creator?.data[0]?.totalScore}</Typography>
+                </Card>
                 )}
             </div>
             <Divider className={classes.divider} />

@@ -1,6 +1,5 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-
 import User from '../models/user.js';
 
 export const signin = async (req, res) => {
@@ -55,17 +54,17 @@ export const getUsers = async(req,res) => {
 
         const users= await User.find().sort({ name: 1 }).limit(LIMIT).skip(startIndex);
 
-        res.status(200).json({ data: uses, currentPage: Number(page), numberOfPages: Math.ceil(total / LIMIT) });
+        res.status(200).json({ data: users, currentPage: Number(page), numberOfPages: Math.ceil(total / LIMIT) });
     } catch (error) {
         res.status(404).json({ message: error.message });
     }
 };
 
 export const getUser = async(req,res) => {
-    const { id } = req.params;
+    const { name } = req.query;
     try {
-        const post = await User.findById(id);
-        res.status(200).json(post);
+        const user = await User.find({ name }).sort({ createdAt: -1 });
+        res.status(200).json(user);
     } catch (error) {
         res.status(404).json({ message: error.message });
     }

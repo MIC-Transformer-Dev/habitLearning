@@ -61,7 +61,9 @@ const PostDetails = () => {
                     </Typography>
                     <Typography variant="body1">{moment(post.createdAt).fromNow()}</Typography>
                     <Divider style={{ margin: '20px 0' }} />
+                    {post.name !== 'Tester 01' && (
                     <ScoreSection post={post} />
+                    )}
                     <Divider style={{ margin: '20px 0' }} />
                     <CommentSection post={post} />
                     <Divider style={{ margin: '20px 0' }} />

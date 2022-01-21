@@ -15,3 +15,5 @@ export const AUTH = 'AUTH';
 export const LOGOUT = 'LOGOUT';
 export const FETCH_ALL_USER = 'FETCH_ALL_USER';
 export const FETCH_USER = 'FETCH_USER';
+export const START_LOADING_USER = 'START_LOADING_USER';
+export const END_LOADING_USER = 'END_LOADING_USER';

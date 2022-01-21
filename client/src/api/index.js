@@ -21,4 +21,4 @@ export const comment = (value, id) => API.post(`/posts/${id}/commentPost`, { val
 export const signIn = (formData) => API.post('/user/signin', formData);
 export const signUp = (formData) => API.post('/user/signup', formData);
 export const fetchUsers = (page) => API.get(`/user?page=${page}`);
-export const fetchUser = (id) => API.get(`/user/${id}`);
+export const fetchUser = (name) => API.get(`/user/name?name=${name}`);

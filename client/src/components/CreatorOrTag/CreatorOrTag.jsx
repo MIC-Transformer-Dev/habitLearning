@@ -24,9 +24,13 @@ const CreatorOrTag = () => {
             dispatch(getPostsByCreator(name));
     },[]);
 
-    useEffect(async () => {
+    const fetchUserData = async () => {
         const data = await fetchUser(name)
         setCreator(data);
+    }
+
+    useEffect(async () => {
+        fetchUserData()
         setLoadingUser(false);
     },[]);
 

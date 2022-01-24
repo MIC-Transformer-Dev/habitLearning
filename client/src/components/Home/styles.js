@@ -18,4 +18,20 @@ export default makeStyles((theme) => ({
       flexDirection: 'column-reverse',
     },
   },
+  table: {
+    minWidth: 700,
+  },
+  divider: {
+    margin: '20px 0',
+    textTransform: 'capitalize'
+  },
+  userName: {
+    textDecoration: 'none',
+    color: 'black'
+  },
+  postsButton: {
+    marginTop: '30px',
+    marginBottom: '10px',
+    fontSize: 20
+  }
 }));

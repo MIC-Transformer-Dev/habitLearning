@@ -52,7 +52,7 @@ export const getUsers = async(req,res) => {
         const startIndex = (Number(page) - 1) * LIMIT; //gettting the start index of every page
         const total = await User.countDocuments({});
 
-        const users= await User.find().sort({ name: 1 }).limit(LIMIT).skip(startIndex);
+        const users= await User.find({isAdmin: false}).sort({ totalScore: -1 }).limit(LIMIT).skip(startIndex);
 
         res.status(200).json({ data: users, currentPage: Number(page), numberOfPages: Math.ceil(total / LIMIT) });
     } catch (error) {

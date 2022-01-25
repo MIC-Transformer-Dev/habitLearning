@@ -4,8 +4,13 @@ import User from "../models/user.js";
 
 export const getPosts = async(req,res) => {
     const { page } = req.query;
+    let LIMIT = 0;
+    if (page == 1 || !page) {
+        LIMIT = 5;
+    } else {
+        LIMIT = 6;
+    }
     try {
-        const LIMIT = 5;
         const startIndex = (Number(page) - 1) * LIMIT; //gettting the start index of every page
         const total = await PostMessage.countDocuments({});
         const creatorPosts= await PostMessage.find({isAdminPost: true, isAdminPost: false}).sort({ createdAt: -1 }).limit(LIMIT).skip(startIndex);

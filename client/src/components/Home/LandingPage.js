@@ -72,7 +72,6 @@ const LandingPage = () => {
         data()
         setLoadingUser(false)
     },[]);
-    console.log(creators)
 
     const handleKeyPress= (event) => {
         if(event.keyCode === 13) {

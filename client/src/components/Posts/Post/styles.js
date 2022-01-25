@@ -53,4 +53,8 @@ export default makeStyles({
     display: 'block',
     textAlign: 'initial',
   },
+  graded: {
+    fontSize: 'small',
+    color: 'blue'
+  }
 });

@@ -63,13 +63,17 @@ const Post = ({ post, setCurrentId }) => {
                     </div>
                 )}
                 <div className={classes.details}>
-                    {post.name === 'System Admin'? (
+                    {post.isAdminPost === true ? (
                     <Typography variant='body2' color='secondary'>{post.tags.map((tag) => `#${tag} `)}</Typography>
                     ) : (
                     <Typography variant='body2' color='textSecondary'>{post.tags.map((tag) => `#${tag} `)}</Typography>
                     )}
                 </div>
-                <Typography variant='h6' className={classes.title} gutterBottom>{post.title}</Typography>
+                <Typography variant='h6' className={classes.title} gutterBottom>{post.title} 
+                    {post.isGraded && (
+                    <span className={classes.graded}>  -graded- </span>
+                    )}
+                </Typography>
                 <CardContent>
                     <Typography variant='body2' color='textSecondary' gutterBottom>{post.message}</Typography>
                 </CardContent>      

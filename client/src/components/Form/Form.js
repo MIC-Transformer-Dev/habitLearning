@@ -59,10 +59,14 @@ const Form = ({ currentId, setCurrentId }) => {
     return (
         <Paper className={classes.paper} elevation={6}> 
             <form autoComplete='off' noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSumbit}>
-                <Typography className={classes.heading} variant='h6' align='center'>Post Your Task Here</Typography>
-                <TextField variant='outlined' label="Title" name="title" fullWidth value={postData.title} onChange={(e) => setPostData({ ...postData, title: e.target.value })} />
-                <TextField variant='outlined' label="Message" name="message" multiline rows={4} fullWidth value={postData.message} onChange={(e) => setPostData({ ...postData, message: e.target.value })} />
-                <TextField variant='outlined' label="Tags (coma separated)" name="tags" fullWidth value={postData.tags} onChange={(e) => setPostData({ ...postData, tags: e.target.value.split(',') })} />
+                {user?.result?.isAdmin === true ? (
+                <Typography className={classes.heading} variant='h6' align='center'>Post Your Challenge Here</Typography>
+                ) : (
+                <Typography className={classes.heading} variant='h6' align='center'>Post Your Challenge Result Here</Typography>
+                )}
+                <TextField variant='outlined' label="Challenge Title" name="title" fullWidth value={postData.title} onChange={(e) => setPostData({ ...postData, title: e.target.value })} />
+                <TextField variant='outlined' label="Challenge Description" name="message" multiline rows={4} fullWidth value={postData.message} onChange={(e) => setPostData({ ...postData, message: e.target.value })} />
+                <TextField variant='outlined' label="Challenge Tags" name="tags" fullWidth value={postData.tags} onChange={(e) => setPostData({ ...postData, tags: e.target.value.split(',') })} />
                 <section className={classes.fileInput}>
                     <FileBase 
                         type='file'

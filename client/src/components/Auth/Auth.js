@@ -79,7 +79,7 @@ const Auth = () => {
                         </Grid> 
                         <Button className={classes.submit} type='sumbit' fullWidth variant='contained' color='primary' >{isSignUp ? 'Sign Up' : 'Sign In'}</Button>
                         {!isSignUp && (<GoogleLogin 
-                            clientId='194547154669-tln0nchridgunk1g8v5osafd6phm4qq0.apps.googleusercontent.com'
+                            clientId='916817304664-1b0i0vfbgica8ljv9s1jdlpt8ulak2m6.apps.googleusercontent.com'
                             render={(renderProps) => (
                                 <Button
                                     className={classes.googleButton}

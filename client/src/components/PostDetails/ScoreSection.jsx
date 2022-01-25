@@ -14,13 +14,14 @@ const CommentSection = ({ post }) => {
     const [score, setScore] = useState('');
 
     const handleClick = async () => {
-        const newScores = await dispatch(updatePost(post._id, {score}));
+        const newScores = await dispatch(updatePost(post._id, {score, isGraded: true}));
         setScores(newScores);
         setScore('');
     }
 
     return (
         <>
+            {post?.isAdminPost === false && (
             <div className={classes.commentsOuterContainer}>
                 <div className={classes.scoreInnerContainer}> 
                     <Typography gutterBottom variant='h6'>Score</Typography>
@@ -55,6 +56,7 @@ const CommentSection = ({ post }) => {
                     </div>
                 )}
             </div>
+            )}
         </>
     );
 };

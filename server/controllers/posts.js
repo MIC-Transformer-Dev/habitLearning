@@ -8,8 +8,8 @@ export const getPosts = async(req,res) => {
         const LIMIT = 6;
         const startIndex = (Number(page) - 1) * LIMIT; //gettting the start index of every page
         const total = await PostMessage.countDocuments({});
-        const creatorPosts= await PostMessage.find({name: {"$ne": 'System Admin'}}).sort({ createdAt: -1 }).limit(LIMIT).skip(startIndex);
-        const adminPosts= await PostMessage.find({name: 'System Admin'}).sort({ createdAt: -1 }).limit(1);
+        const creatorPosts= await PostMessage.find({isAdminPost: true, isAdminPost: false}).sort({ createdAt: -1 }).limit(LIMIT).skip(startIndex);
+        const adminPosts= await PostMessage.find({isAdminPost: true}).sort({ createdAt: -1 }).limit(1).skip(startIndex);
         const posts = [...adminPosts, ...creatorPosts]
         res.status(200).json({ data: posts, currentPage: Number(page), numberOfPages: Math.ceil(total / LIMIT) });
     } catch (error) {
@@ -51,8 +51,12 @@ export const getPostsBySearch = async (req, res) => {
 
 export const createPost = async(req,res) => {
     const post = req.body;
-    const newPost = new PostMessage({ ...post, creator: req.userId, createdAt: new Date().toISOString()});
+    const newPost = new PostMessage({ ...post, creator: req.userId, isAdminPost: req.isAdmin, createdAt: new Date().toISOString()});
     try {
+        const existingTag = await PostMessage.find({ $and: [{ creator: req.userId}, {tags: post.tags[0]} ] })
+        if (existingTag[0]) {
+            return res.status(404).json({message: 'This challenge is already done by you.'});
+        }
         await newPost.save();
         res.status(201).json(newPost);
     } catch (error) {
@@ -74,7 +78,6 @@ export const updatePost = async (req,res) => {
             {$group: { _id: '$name', total: { $sum: "$score" }  }}
         ])
         const updatedUser = await User.findByIdAndUpdate(creatorData._id, {totalScore: sumData[0].total}, { new: true });
-        console.log(updatedUser)
         res.json(updatedPost);
     } catch (error) {
         res.status(409).json({message: error.message});

@@ -63,7 +63,7 @@ const Post = ({ post, setCurrentId }) => {
                     </div>
                 )}
                 <div className={classes.details}>
-                    {post.name === 'Tester 01'? (
+                    {post.name === 'System Admin'? (
                     <Typography variant='body2' color='secondary'>{post.tags.map((tag) => `#${tag} `)}</Typography>
                     ) : (
                     <Typography variant='body2' color='textSecondary'>{post.tags.map((tag) => `#${tag} `)}</Typography>

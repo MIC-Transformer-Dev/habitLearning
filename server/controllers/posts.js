@@ -8,8 +8,8 @@ export const getPosts = async(req,res) => {
         const LIMIT = 6;
         const startIndex = (Number(page) - 1) * LIMIT; //gettting the start index of every page
         const total = await PostMessage.countDocuments({});
-        const creatorPosts= await PostMessage.find({name: {"$ne": 'Tester 01'}}).sort({ createdAt: -1 }).limit(LIMIT).skip(startIndex);
-        const adminPosts= await PostMessage.find({name: 'Tester 01'}).sort({ createdAt: -1 }).limit(1);
+        const creatorPosts= await PostMessage.find({name: {"$ne": 'System Admin'}}).sort({ createdAt: -1 }).limit(LIMIT).skip(startIndex);
+        const adminPosts= await PostMessage.find({name: 'System Admin'}).sort({ createdAt: -1 }).limit(1);
         const posts = [...adminPosts, ...creatorPosts]
         res.status(200).json({ data: posts, currentPage: Number(page), numberOfPages: Math.ceil(total / LIMIT) });
     } catch (error) {
